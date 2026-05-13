@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verde | أحذية عصرية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Cormorant+Garamond:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g50:#f0faf4;--g100:#d4f1e0;--g200:#a8e4c1;--g300:#6ecf9a;
+  --g400:#3db876;--g500:#2a9d5c;--g600:#1e7a44;--g700:#155a31;
+  --g800:#0d3d20;--g900:#062210;
+  --cream:#faf9f6;--warm:#f4f1eb;
+  --ink:#0f1a14;--ink2:#2c3e35;--ink3:#4a6157;--ink4:#7a9b8e;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Cairo',sans-serif;background:var(--cream);color:var(--ink);direction:rtl;overflow-x:hidden;}
+
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:9999;background:var(--g800);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.ld-logo{font-family:'Cormorant Garamond',serif;font-size:76px;font-weight:300;color:#fff;letter-spacing:14px;opacity:0;transform:translateY(28px);animation:fadeUp 0.9s 0.3s cubic-bezier(.22,1,.36,1) forwards;}
+.ld-sub{font-family:'Cairo',sans-serif;font-size:12px;font-weight:300;color:rgba(255,255,255,0.45);letter-spacing:6px;margin-top:4px;opacity:0;animation:fadeUp 0.8s 0.7s ease forwards;}
+.ld-shoe{margin:36px 0 30px;opacity:0;animation:fadeUp 0.8s 0.9s ease forwards;}
+.ld-shoe svg{animation:shoeFloat 2.2s 1.4s ease-in-out infinite;}
+.ld-bar{width:200px;height:2px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;}
+.ld-fill{height:100%;background:linear-gradient(90deg,var(--g400),var(--g300));border-radius:2px;width:0;animation:barFill 1.9s 0.7s cubic-bezier(.4,0,.2,1) forwards;}
+.ld-pct{font-size:11px;color:rgba(255,255,255,0.35);margin-top:10px;letter-spacing:3px;opacity:0;animation:fadeUp 0.5s 1s ease forwards;}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes barFill{to{width:100%}}
+@keyframes shoeFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(-1deg)}}
+#loader.out{animation:loaderFade 0.7s 0.1s ease forwards;}
+@keyframes loaderFade{to{opacity:0;visibility:hidden}}
+
+/* REVEAL ANIMATIONS */
+.rv{opacity:0;transform:translateY(36px);transition:opacity 0.75s cubic-bezier(.22,1,.36,1),transform 0.75s cubic-bezier(.22,1,.36,1);}
+.rv.in{opacity:1;transform:translateY(0);}
+.rv-l{opacity:0;transform:translateX(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.rv-l.in{opacity:1;transform:translateX(0);}
+
+/* CURSOR */
+#cur{width:10px;height:10px;background:var(--g400);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+#curR{width:34px;height:34px;border:1.5px solid var(--g400);border-radius:50%;position:fixed;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;background:rgba(250,249,246,0.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(62,184,118,0.1);}
+.hdr{max-width:1280px;margin:0 auto;padding:0 2.5rem;height:72px;display:flex;align-items:center;justify-content:space-between;}
+.logo-wrap{display:flex;flex-direction:column;gap:0;cursor:pointer;}
+.logo-en{font-family:'Cormorant Garamond',serif;font-size:33px;font-weight:600;color:var(--g600);letter-spacing:6px;line-height:1;transition:color .2s;}
+.logo-ar{font-size:10px;font-weight:300;color:var(--ink4);letter-spacing:3px;}
+.logo-wrap:hover .logo-en{color:var(--g500);}
+nav{display:flex;gap:2px;}
+nav a{font-size:14px;font-weight:600;color:var(--ink3);text-decoration:none;padding:8px 16px;border-radius:22px;transition:all .25s;}
+nav a:hover{background:var(--g100);color:var(--g600);}
+.crt-btn{display:flex;align-items:center;gap:8px;background:var(--g600);color:#fff;border:none;padding:10px 22px;border-radius:24px;font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;}
+.crt-btn:hover{background:var(--g500);transform:translateY(-1px);box-shadow:0 8px 24px rgba(30,122,68,.28);}
+.crt-badge{background:#fff;color:var(--g600);border-radius:50%;width:22px;height:22px;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;}
+
+/* HERO */
+.hero{min-height:calc(100vh - 72px);display:flex;align-items:center;overflow:hidden;position:relative;background:var(--cream);}
+.h-bg{position:absolute;inset:0;overflow:hidden;}
+.h-circ1{position:absolute;top:-10%;left:-5%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(168,228,193,.32) 0%,transparent 70%);animation:breathe 9s ease-in-out infinite;}
+.h-circ2{position:absolute;bottom:-15%;right:-8%;width:780px;height:780px;border-radius:50%;background:radial-gradient(circle,rgba(62,184,118,.1) 0%,transparent 65%);animation:breathe 11s 2s ease-in-out infinite;}
+.h-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(30,122,68,.07) 1px,transparent 1px);background-size:36px 36px;}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.h-inner{max-width:1280px;margin:0 auto;padding:0 2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1;}
+.h-tag{display:inline-flex;align-items:center;gap:8px;background:var(--g100);color:var(--g600);padding:8px 18px;border-radius:24px;font-size:13px;font-weight:700;margin-bottom:26px;border:1px solid var(--g200);opacity:0;animation:fadeUp 0.8s 2.2s ease forwards;}
+.h-dot{width:7px;height:7px;border-radius:50%;background:var(--g500);animation:blink 2.2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero h1{font-size:62px;font-weight:900;line-height:1.1;margin-bottom:18px;opacity:0;animation:fadeUp 0.9s 2.4s ease forwards;}
+.hero h1 em{font-family:'Playfair Display',serif;font-style:italic;color:var(--g500);font-weight:400;}
+.hero p{font-size:17px;color:var(--ink3);line-height:1.9;margin-bottom:38px;font-weight:400;opacity:0;animation:fadeUp 0.9s 2.6s ease forwards;}
+.h-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.9s 2.8s ease forwards;}
+.btn-p{background:var(--g600);color:#fff;border:none;padding:15px 36px;border-radius:28px;font-family:'Cairo',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .3s;}
+.btn-p:hover{background:var(--g500);transform:translateY(-3px);box-shadow:0 12px 32px rgba(30,122,68,.33);}
+.btn-o{background:transparent;color:var(--g600);border:2px solid var(--g300);padding:15px 36px;border-radius:28px;font-family:'Cairo',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .3s;}
+.btn-o:hover{background:var(--g100);}
+.h-visual{display:flex;flex-direction:column;align-items:center;gap:18px;opacity:0;animation:slideLeft 1.1s 2.2s cubic-bezier(.22,1,.36,1) forwards;}
+@keyframes slideLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+.h-stage{width:100%;aspect-ratio:1;background:linear-gradient(135deg,var(--g100),var(--g50));border-radius:40px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border:1px solid var(--g200);}
+.h-stage::before{content:'';position:absolute;top:20%;left:10%;width:80%;height:60%;background:radial-gradient(ellipse,rgba(62,184,118,.15) 0%,transparent 70%);}
+.h-shoe{width:74%;animation:floatH 4.5s ease-in-out infinite;}
+@keyframes floatH{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-18px) rotate(-3deg)}}
+.h-stats{display:flex;gap:16px;width:100%;}
+.h-stat{background:#fff;border:1px solid var(--g100);border-radius:16px;padding:14px 18px;flex:1;text-align:center;}
+.h-stat-n{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--g600);}
+.h-stat-l{font-size:12px;color:var(--ink4);font-weight:600;margin-top:2px;}
+
+/* SECTION LABELS */
+.sec{text-align:center;margin-bottom:50px;}
+.sec-eye{font-size:12px;font-weight:700;color:var(--g500);letter-spacing:4px;text-transform:uppercase;margin-bottom:10px;}
+.sec-h{font-size:38px;font-weight:900;color:var(--ink);line-height:1.15;}
+.sec-h em{font-family:'Playfair Display',serif;font-style:italic;color:var(--g500);font-weight:400;}
+.sec-line{width:46px;height:3px;background:linear-gradient(90deg,var(--g500),var(--g300));border-radius:3px;margin:14px auto 0;}
+
+/* CATEGORIES */
+.cats-wrap{padding:88px 2.5rem;max-width:1280px;margin:0 auto;}
+.cats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+.cat-card{background:#fff;border-radius:24px;padding:32px 14px 24px;text-align:center;cursor:pointer;border:1.5px solid var(--g100);transition:all .35s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;}
+.cat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--g50),#fff);opacity:0;transition:opacity .35s;}
+.cat-bar{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g500),var(--g300));transform:scaleX(0);transition:transform .35s;z-index:2;}
+.cat-card:hover{transform:translateY(-8px);box-shadow:0 18px 44px rgba(30,122,68,.13);border-color:var(--g300);}
+.cat-card.on{border-color:var(--g500);background:linear-gradient(135deg,var(--g50),#fff);}
+.cat-card:hover::after,.cat-card.on::after{opacity:1;}
+.cat-card:hover .cat-bar,.cat-card.on .cat-bar{transform:scaleX(1);}
+.cat-ico{position:relative;z-index:1;width:70px;height:70px;background:var(--g100);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;transition:all .35s;}
+.cat-ico svg{width:38px;height:38px;}
+.cat-card:hover .cat-ico,.cat-card.on .cat-ico{background:var(--g200);transform:scale(1.1);}
+.cat-name{font-size:16px;font-weight:800;color:var(--ink);position:relative;z-index:1;}
+.cat-cnt{font-size:12px;color:var(--g500);font-weight:600;margin-top:4px;position:relative;z-index:1;}
+
+/* PRODUCTS */
+.prods-sec{background:#fff;padding:68px 2.5rem;}
+.prods-inner{max-width:1280px;margin:0 auto;}
+.prods-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:38px;}
+.prods-top h2{font-size:24px;font-weight:900;display:flex;align-items:center;gap:10px;}
+.prods-top h2 svg{width:24px;height:24px;}
+.pills{display:flex;gap:8px;}
+.pill{padding:8px 17px;border-radius:22px;border:1.5px solid var(--g200);background:#fff;color:var(--ink3);font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;}
+.pill:hover,.pill.on{background:var(--g600);color:#fff;border-color:var(--g600);}
+.prods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:22px;}
+
+/* PRODUCT CARD */
+.pc{background:var(--g50);border-radius:22px;overflow:hidden;border:1.5px solid var(--g100);transition:all .35s cubic-bezier(.22,1,.36,1);animation:cardIn .5s ease both;}
+@keyframes cardIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.pc:hover{transform:translateY(-8px);box-shadow:0 18px 44px rgba(30,122,68,.11);border-color:var(--g200);}
+.pc-img{position:relative;width:100%;height:196px;background:linear-gradient(135deg,var(--g100),var(--g50));display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.pc-img svg{width:60%;height:auto;transition:transform .4s cubic-bezier(.22,1,.36,1);}
+.pc:hover .pc-img svg{transform:scale(1.08) translateY(-4px);}
+.pc-badge{position:absolute;top:12px;right:12px;padding:5px 11px;border-radius:13px;font-size:11px;font-weight:800;letter-spacing:.5px;}
+.b-new{background:var(--g600);color:#fff;}
+.b-sale{background:#c0392b;color:#fff;}
+.b-luxury{background:var(--ink2);color:#fff;}
+.b-summer{background:#d35400;color:#fff;}
+.pc-body{padding:16px;}
+.pc-name{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:6px;}
+.price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:14px;}
+.p-now{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--g600);}
+.p-old{font-size:13px;color:var(--ink4);text-decoration:line-through;}
+.sel-lbl{font-size:11px;font-weight:700;color:var(--ink4);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
+.sz-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:13px;}
+.sz{min-width:34px;height:34px;padding:0 5px;border-radius:7px;border:1.5px solid var(--g200);background:#fff;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;color:var(--ink2);cursor:pointer;transition:all .16s;display:flex;align-items:center;justify-content:center;}
+.sz:hover,.sz.on{background:var(--g600);color:#fff;border-color:var(--g600);}
+.cl-row{display:flex;gap:8px;margin-bottom:16px;}
+.cl{width:24px;height:24px;border-radius:50%;border:2.5px solid transparent;cursor:pointer;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,.11);}
+.cl.on{border-color:var(--g700);transform:scale(1.3);}
+.add-btn{width:100%;background:linear-gradient(135deg,var(--g600),var(--g500));color:#fff;border:none;padding:12px 14px;border-radius:13px;font-family:'Cairo',sans-serif;font-size:15px;font-weight:800;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.add-btn:hover{background:linear-gradient(135deg,var(--g700),var(--g600));transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,122,68,.28);}
+.add-btn:active{transform:scale(0.97);}
+.add-btn svg{width:17px;height:17px;transition:transform .25s;}
+.add-btn:hover svg{transform:scale(1.2);}
+
+/* EMPTY STATE */
+.empty-s{grid-column:1/-1;text-align:center;padding:70px 20px;color:var(--ink4);}
+.empty-s svg{width:72px;height:72px;opacity:.2;margin-bottom:14px;}
+
+/* OFFERS */
+.offers{padding:88px 2.5rem;background:var(--warm);}
+.off-inner{max-width:1280px;margin:0 auto;}
+.off-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:18px;margin-top:50px;}
+.off-card{border-radius:28px;overflow:hidden;cursor:pointer;transition:transform .35s cubic-bezier(.22,1,.36,1);}
+.off-card:hover{transform:translateY(-6px);}
+.off-card.big{grid-row:span 2;}
+.off-inner-box{padding:34px 30px;min-height:220px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;}
+.off-card.big .off-inner-box{min-height:500px;}
+.off-a{background:linear-gradient(158deg,var(--g700) 0%,var(--g500) 100%);}
+.off-b{background:linear-gradient(158deg,var(--g800) 0%,var(--g600) 100%);}
+.off-c{background:linear-gradient(158deg,#0b4d2a 0%,var(--g500) 100%);}
+.off-d{background:linear-gradient(158deg,#134d30 0%,var(--g400) 100%);}
+.off-deco{position:absolute;top:-10%;right:-5%;opacity:.07;transition:transform .4s;}
+.off-card:hover .off-deco{transform:scale(1.1) rotate(4deg);}
+.off-tag{display:inline-block;background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.22);padding:5px 13px;border-radius:13px;font-size:12px;font-weight:700;margin-bottom:10px;letter-spacing:1px;}
+.off-disc{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:#fff;line-height:1;}
+.off-card.big .off-disc{font-size:78px;}
+.off-title{font-size:17px;font-weight:800;color:rgba(255,255,255,.94);line-height:1.3;margin-bottom:18px;}
+.off-card.big .off-title{font-size:25px;}
+.off-cta{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);color:#fff;border:1.5px solid rgba(255,255,255,.3);padding:10px 20px;border-radius:20px;font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;backdrop-filter:blur(6px);}
+.off-cta:hover{background:rgba(255,255,255,.26);}
+
+/* CART */
+.overlay{position:fixed;inset:0;background:rgba(10,26,18,.5);z-index:199;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(4px);}
+.overlay.on{opacity:1;pointer-events:all;}
+.cart-side{position:fixed;left:0;top:0;bottom:0;width:400px;background:#fff;z-index:200;transform:translateX(-110%);transition:transform .4s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;box-shadow:10px 0 60px rgba(0,0,0,.13);}
+.cart-side.on{transform:translateX(0);}
+.cart-hd{padding:22px 26px;border-bottom:1px solid var(--g100);display:flex;align-items:center;justify-content:space-between;}
+.cart-hd h3{font-size:20px;font-weight:900;}
+.c-close{width:36px;height:36px;border-radius:50%;background:var(--g100);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--g700);transition:all .2s;}
+.c-close:hover{background:var(--g200);}
+.cart-bd{flex:1;overflow-y:auto;padding:18px 26px;}
+.c-item{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid var(--g50);animation:slideIn .3s ease both;}
+@keyframes slideIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
+.c-img{width:62px;height:62px;border-radius:13px;background:var(--g50);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--g100);}
+.c-img svg{width:38px;height:38px;}
+.c-info{flex:1;}
+.c-name{font-size:14px;font-weight:800;}
+.c-meta{font-size:12px;color:var(--ink4);margin-top:3px;}
+.c-price{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--g600);margin-top:4px;}
+.c-del{background:none;border:none;cursor:pointer;color:var(--ink4);padding:4px;border-radius:6px;transition:all .2s;display:flex;align-items:center;}
+.c-del:hover{color:#c0392b;background:#fdf0f0;}
+.cart-ft{padding:20px 26px;border-top:1px solid var(--g100);}
+.c-total{display:flex;justify-content:space-between;font-size:18px;font-weight:900;margin-bottom:16px;}
+.c-total span:last-child{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--g600);}
+.wa-btn{width:100%;background:#25D366;color:#fff;border:none;padding:16px;border-radius:15px;font-family:'Cairo',sans-serif;font-size:17px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .25s;}
+.wa-btn:hover{background:#1da851;transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.32);}
+.wa-btn svg{width:24px;height:24px;}
+.c-empty{text-align:center;padding:56px 0;}
+.c-empty svg{width:60px;height:60px;opacity:.2;margin-bottom:10px;}
+
+/* FOOTER */
+footer{background:var(--g800);color:rgba(255,255,255,.72);padding:62px 2.5rem 30px;}
+.ft-inner{max-width:1280px;margin:0 auto;}
+.ft-grid{display:grid;grid-template-columns:2.5fr 1fr 1fr;gap:56px;margin-bottom:46px;}
+.ft-logo-en{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:#fff;letter-spacing:6px;}
+.ft-logo-ar{font-size:10px;font-weight:300;color:rgba(255,255,255,.38);letter-spacing:3px;}
+.ft-brand p{font-size:14px;margin-top:12px;line-height:1.9;font-weight:300;}
+.ft-wa{display:inline-flex;align-items:center;gap:8px;margin-top:18px;background:rgba(37,211,102,.14);border:1px solid rgba(37,211,102,.28);color:#fff;padding:10px 20px;border-radius:22px;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;}
+.ft-wa:hover{background:rgba(37,211,102,.24);}
+.ft-col h4{font-size:13px;font-weight:800;color:#fff;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;}
+.ft-col a{display:block;font-size:14px;color:rgba(255,255,255,.55);text-decoration:none;margin-bottom:9px;transition:color .2s;font-weight:400;}
+.ft-col a:hover{color:var(--g300);}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.3);}
+.ft-bottom span:last-child{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:5px;color:rgba(255,255,255,.15);}
+
+/* TOAST */
+.toast{position:fixed;bottom:30px;right:30px;background:var(--ink);color:#fff;padding:14px 22px;border-radius:15px;font-size:14px;font-weight:700;z-index:1000;transform:translateY(70px);opacity:0;transition:all .4s cubic-bezier(.22,1,.36,1);display:flex;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,.18);}
+.toast.on{transform:translateY(0);opacity:1;}
+.toast svg{color:var(--g400);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .h-inner{grid-template-columns:1fr;}.h-visual{display:none;}
+  .cats-grid{grid-template-columns:repeat(3,1fr);}
+  .off-grid{grid-template-columns:1fr 1fr;}.off-card.big{grid-column:span 2;grid-row:span 1;}
+  .off-card.big .off-inner-box{min-height:260px;}.off-card.big .off-disc{font-size:56px;}
+  .ft-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){
+  .cats-grid{grid-template-columns:repeat(2,1fr);}
+  .hero h1{font-size:40px;}
+  nav{display:none;}
+  .off-grid{grid-template-columns:1fr;}.off-card.big{grid-column:span 1;}
+  .cart-side{width:100%;}
+  .ft-grid{grid-template-columns:1fr;}
+  #cur,#curR{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-logo">Verde</div>
+  <div class="ld-sub">أحذية عصرية</div>
+  <div class="ld-shoe">
+    <svg viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg" width="130" height="60">
+      <path d="M20 68 C30 50 55 30 90 28 C115 27 135 35 155 40 L178 44 C182 44 184 46 183 50 L182 56 C181 60 178 62 174 62 L160 64 C145 67 120 70 90 70 L30 70 C24 70 20 68 20 68Z" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.45)" stroke-width="1.5"/>
+      <path d="M20 68 C20 72 24 75 30 75 L160 75 C168 75 174 72 174 68" stroke="rgba(255,255,255,.28)" stroke-width="1.5" fill="none"/>
+      <path d="M55 28 C60 20 68 18 78 20" stroke="rgba(255,255,255,.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path d="M100 27 L105 18" stroke="rgba(255,255,255,.22)" stroke-width="1" stroke-linecap="round"/>
+      <path d="M120 30 L128 22" stroke="rgba(255,255,255,.18)" stroke-width="1" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+  <div class="ld-pct" id="ldPct">0%</div>
+</div>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="curR"></div>
+
+<!-- OVERLAY & CART -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="cart-side" id="cartSide">
+  <div class="cart-hd">
+    <h3>سلة التسوق</h3>
+    <button class="c-close" onclick="closeCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="17" height="17"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="cart-bd" id="cartBd">
+    <div class="c-empty">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="30" stroke="#2a9d5c" stroke-width="2"/><path d="M16 24h32l-4 20H20L16 24z" stroke="#2a9d5c" stroke-width="2" fill="none"/><path d="M24 24V20a8 8 0 0 1 16 0v4" stroke="#2a9d5c" stroke-width="2" fill="none"/></svg>
+      <p style="font-size:15px;font-weight:700;color:var(--ink4)">السلة فارغة</p>
+      <p style="font-size:13px;color:var(--ink4);margin-top:4px">أضيفي منتجات من الأقسام</p>
+    </div>
+  </div>
+  <div class="cart-ft" id="cartFt" style="display:none">
+    <div class="c-total"><span>الإجمالي</span><span id="cartSum">0 جنيه</span></div>
+    <button class="wa-btn" onclick="sendWA()">
+      <svg viewBox="0 0 24 24" fill="white" width="22" height="22"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      اطلبي عبر واتساب
+    </button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr">
+    <div class="logo-wrap" onclick="scrollTo({top:0,behavior:'smooth'})">
+      <div class="logo-en">Verde</div>
+      <div class="logo-ar">أحذية عصرية</div>
+    </div>
+    <nav>
+      <a href="#" onclick="scrollTo({top:0,behavior:'smooth'});return false">الرئيسية</a>
+      <a href="#" onclick="document.getElementById('cats-sec').scrollIntoView({behavior:'smooth'});return false">الأقسام</a>
+      <a href="#" onclick="document.getElementById('off-sec').scrollIntoView({behavior:'smooth'});return false">العروض</a>
+    </nav>
+    <button class="crt-btn" onclick="openCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="17" height="17"><path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+      السلة
+      <span class="crt-badge" id="crtBadge">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="h-bg"><div class="h-circ1"></div><div class="h-circ2"></div><div class="h-dots"></div></div>
+  <div class="h-inner">
+    <div>
+      <div class="h-tag"><span class="h-dot"></span>تشكيلة ٢٠٢٥ وصلت</div>
+      <h1>استايل <em>Verde</em><br>يميزك دايمًا</h1>
+      <p>أجمل الأحذية والشنط بأعلى جودة وأفضل أسعار —<br>من سليبرات يومية لهليزات سهرة فاخرة</p>
+      <div class="h-btns">
+        <button class="btn-p" onclick="document.getElementById('cats-sec').scrollIntoView({behavior:'smooth'})">تسوقي الآن</button>
+        <button class="btn-o" onclick="document.getElementById('off-sec').scrollIntoView({behavior:'smooth'})">شوفي العروض</button>
+      </div>
+    </div>
+    <div class="h-visual">
+      <div class="h-stage">
+        <svg class="h-shoe" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 150 C60 110 110 65 180 60 C230 57 270 72 310 82 L360 90 C368 90 372 94 370 102 L368 112 C366 120 362 124 354 124 L330 128 C300 134 250 140 180 140 L60 140 C50 140 40 150 40 150Z" fill="#2a9d5c" opacity=".88"/>
+          <path d="M40 150 C40 160 50 165 62 165 L330 165 C348 165 358 158 358 150" fill="#1e7a44"/>
+          <path d="M110 60 C118 42 132 38 152 42" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55"/>
+          <path d="M200 58 L208 40" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".45"/>
+          <path d="M240 63 L252 46" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".45"/>
+          <path d="M280 74 L294 60" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".35"/>
+          <path d="M60 130 L330 130" stroke="rgba(255,255,255,.18)" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <ellipse cx="200" cy="168" rx="160" ry="8" fill="rgba(30,122,68,.13)"/>
+        </svg>
+      </div>
+      <div class="h-stats">
+        <div class="h-stat"><div class="h-stat-n">+٥٠٠</div><div class="h-stat-l">منتج متاح</div></div>
+        <div class="h-stat"><div class="h-stat-n">٤.٩</div><div class="h-stat-l">تقييم العملاء</div></div>
+        <div class="h-stat"><div class="h-stat-n">٣ أيام</div><div class="h-stat-l">توصيل سريع</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="cats-sec">
+<div class="cats-wrap">
+  <div class="sec rv">
+    <div class="sec-eye">أقسامنا</div>
+    <div class="sec-h">اختاري القسم <em>اللي يناسبك</em></div>
+    <div class="sec-line"></div>
+  </div>
+  <div class="cats-grid rv" style="transition-delay:.1s">
+    <div class="cat-card" onclick="showCat('women')" id="cat-women">
+      <div class="cat-bar"></div>
+      <div class="cat-ico">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 36 C12 26 22 14 32 12 C38 11 42 14 44 18 L46 22 C46 24 45 25 43 25 L38 26 C30 28 20 30 10 30 L6 30 C5 28 8 36 8 36Z" fill="#2a9d5c" opacity=".85"/>
+          <path d="M8 36 C8 38 10 39 12 39 L38 39 C42 39 44 38 44 36" fill="#1e7a44"/>
+          <path d="M18 12 C20 8 24 7 28 9" stroke="#2a9d5c" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="cat-name">حريمي</div><div class="cat-cnt">٢٤ منتج</div>
+    </div>
+    <div class="cat-card" onclick="showCat('kids')" id="cat-kids">
+      <div class="cat-bar"></div>
+      <div class="cat-ico">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 32 C9 24 18 16 26 15 C31 14 35 16 38 19 L40 22 C40 24 39 25 37 25 L32 26 C26 27 16 29 9 29 L5 29 C5 31 6 32 6 32Z" fill="#2a9d5c" opacity=".85"/>
+          <path d="M6 32 C6 35 8 36 10 36 L36 36 C39 36 40 35 40 33" fill="#1e7a44"/>
+          <circle cx="14" cy="14" r="4" fill="#6ecf9a" opacity=".55"/>
+          <path d="M20 12 C21 9 24 8 26 10" stroke="#2a9d5c" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="cat-name">أطفالي</div><div class="cat-cnt">١٨ منتج</div>
+    </div>
+    <div class="cat-card" onclick="showCat('slippers')" id="cat-slippers">
+      <div class="cat-bar"></div>
+      <div class="cat-ico">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 28 C9 22 20 18 30 19 C36 19 40 21 42 24 L43 26 C43 28 41 29 39 29 L12 31 C8 31 6 30 6 28Z" fill="#2a9d5c" opacity=".85"/>
+          <path d="M6 28 C5 30 7 32 10 32 L38 32 C41 32 43 31 43 29" fill="#1e7a44"/>
+          <ellipse cx="36" cy="20" rx="5" ry="3" fill="#6ecf9a" opacity=".65"/>
+        </svg>
+      </div>
+      <div class="cat-name">سليبرات</div><div class="cat-cnt">١٥ منتج</div>
+    </div>
+    <div class="cat-card" onclick="showCat('heels')" id="cat-heels">
+      <div class="cat-bar"></div>
+      <div class="cat-ico">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 36 C14 24 24 10 34 8 C38 7 41 9 42 12 L44 18 C44 20 43 21 41 21 L34 22 C26 24 16 28 10 34 L8 36Z" fill="#2a9d5c" opacity=".85"/>
+          <path d="M8 36 L10 40 C11 42 14 42 16 41 L10 34Z" fill="#1e7a44"/>
+          <path d="M38 38 L40 42 C40 43 39 44 38 44 L35 44 C34 44 34 43 35 42 L36 38Z" fill="#1e7a44"/>
+          <path d="M10 34 C20 30 35 28 38 38" stroke="#155a31" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="cat-name">هليزات</div><div class="cat-cnt">٢٠ منتج</div>
+    </div>
+    <div class="cat-card" onclick="showCat('bags')" id="cat-bags">
+      <div class="cat-bar"></div>
+      <div class="cat-ico">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="18" width="32" height="24" rx="4" fill="#2a9d5c" opacity=".85"/>
+          <path d="M16 18 C16 12 20 8 24 8 C28 8 32 12 32 18" stroke="#1e7a44" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M8 26 L40 26" stroke="white" stroke-width="1.5" opacity=".25"/>
+          <rect x="19" y="22" width="10" height="6" rx="3" fill="white" opacity=".18"/>
+        </svg>
+      </div>
+      <div class="cat-name">شنط</div><div class="cat-cnt">١٢ منتج</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="prods-sec" id="prods-sec">
+  <div class="prods-inner">
+    <div class="prods-top">
+      <h2 id="prodsTitle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--g500)" stroke-width="2" width="24" height="24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.982 1.61h9.71a2 2 0 001.967-1.655L23 6H6"/></svg>
+        اختاري قسمًا لعرض المنتجات
+      </h2>
+      <div class="pills">
+        <button class="pill on" onclick="filterP('all',this)">الكل</button>
+        <button class="pill" onclick="filterP('new',this)">جديد</button>
+        <button class="pill" onclick="filterP('sale',this)">عروض</button>
+      </div>
+    </div>
+    <div class="prods-grid" id="prodsGrid">
+      <div class="empty-s">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="38" stroke="#a8e4c1" stroke-width="2"/>
+          <path d="M15 44 C20 30 35 18 52 18 C62 18 68 22 70 28" stroke="#a8e4c1" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M15 44 C15 48 19 50 24 50 L60 50 C66 50 70 48 70 44" stroke="#a8e4c1" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <p style="font-size:17px;font-weight:800">اضغطي على قسم من فوق</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERS -->
+<section class="offers" id="off-sec">
+  <div class="off-inner">
+    <div class="sec rv">
+      <div class="sec-eye">عروض حصرية</div>
+      <div class="sec-h">خصومات تصل <em>لـ ٥٠٪</em></div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="off-grid rv" style="transition-delay:.1s">
+      <div class="off-card big">
+        <div class="off-inner-box off-a">
+          <div class="off-deco">
+            <svg viewBox="0 0 200 100" width="230" height="115" fill="none"><path d="M20 80 C35 55 70 25 120 22 C150 20 170 28 185 40 L195 50 C196 55 194 58 190 58 L175 60 C150 65 110 70 70 70 L20 70Z" fill="white"/></svg>
+          </div>
+          <span class="off-tag">عرض الأسبوع</span>
+          <div class="off-disc">٥٠٪</div>
+          <div class="off-title">تشكيلة الهليزات الجديدة<br>بنص السعر</div>
+          <button class="off-cta" onclick="showCat('heels')">تسوقي الآن ←</button>
+        </div>
+      </div>
+      <div class="off-card">
+        <div class="off-inner-box off-b">
+          <div class="off-deco">
+            <svg viewBox="0 0 120 80" width="140" height="90" fill="none"><path d="M5 55 C10 38 30 15 55 14 C70 13 80 18 85 25 L90 30 C90 33 88 35 85 35 L70 37 C55 39 30 42 10 42Z" fill="white"/></svg>
+          </div>
+          <span class="off-tag">أطفالي</span>
+          <div class="off-disc">٣٠٪</div>
+          <div class="off-title">أحذية الأطفال العودة للمدرسة</div>
+          <button class="off-cta" onclick="showCat('kids')">تسوقي ←</button>
+        </div>
+      </div>
+      <div class="off-card">
+        <div class="off-inner-box off-c">
+          <div class="off-deco">
+            <svg viewBox="0 0 120 100" width="140" height="115" fill="none"><rect x="10" y="20" width="100" height="70" rx="8" fill="white"/><path d="M30 20 C30 10 42 6 55 6 C68 6 80 10 80 20" stroke="white" stroke-width="5" fill="none"/></svg>
+          </div>
+          <span class="off-tag">شنط</span>
+          <div class="off-disc">٤٠٪</div>
+          <div class="off-title">شنط عصرية وأنيقة</div>
+          <button class="off-cta" onclick="showCat('bags')">تسوقي ←</button>
+        </div>
+      </div>
+      <div class="off-card">
+        <div class="off-inner-box off-d">
+          <span class="off-tag">صيف ٢٠٢٥</span>
+          <div class="off-disc">٢٥٪</div>
+          <div class="off-title">سليبرات صيفية مريحة</div>
+          <button class="off-cta" onclick="showCat('slippers')">تسوقي ←</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="ft-logo-en">Verde</div>
+        <div class="ft-logo-ar">أحذية عصرية</div>
+        <p>محل أحذية متخصص في أحدث الموضات وأجود الخامات بأسعار تناسب الجميع. جودة عالية — تسليم سريع — خدمة مميزة.</p>
+        <a class="ft-wa" href="https://wa.me/201145320595">
+          <svg viewBox="0 0 24 24" fill="white" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          01145320595
+        </a>
+      </div>
+      <div class="ft-col">
+        <h4>الأقسام</h4>
+        <a href="#" onclick="showCat('women');return false">حريمي</a>
+        <a href="#" onclick="showCat('kids');return false">أطفالي</a>
+        <a href="#" onclick="showCat('slippers');return false">سليبرات</a>
+        <a href="#" onclick="showCat('heels');return false">هليزات</a>
+        <a href="#" onclick="showCat('bags');return false">شنط</a>
+      </div>
+      <div class="ft-col">
+        <h4>تواصل معنا</h4>
+        <a href="https://wa.me/201145320595">واتساب</a>
+        <a href="#">إنستجرام</a>
+        <a href="#">فيسبوك</a>
+        <a href="#">تيك توك</a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© ٢٠٢٥ جميع الحقوق محفوظة لـ Verde</span>
+      <span>VERDE</span>
+    </div>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="17" height="17"><path d="M20 6 9 17l-5-5"/></svg>
+  <span id="toastMsg">تم الإضافة!</span>
+</div>
+
+<script>
+/* SVG ICONS */
+const ICONS={
+  women:`<svg viewBox="0 0 80 80" fill="none"><path d="M12 60 C18 44 34 24 52 22 C62 21 68 24 70 30 L73 36 C73 40 71 42 68 42 L58 44 C44 47 26 50 14 50 L8 50 C7 47 12 60 12 60Z" fill="#2a9d5c" opacity=".88"/><path d="M12 60 C12 64 15 66 19 66 L60 66 C66 66 70 64 70 60" fill="#1e7a44"/><path d="M28 22 C31 14 38 12 46 15" stroke="#2a9d5c" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>`,
+  kids:`<svg viewBox="0 0 80 80" fill="none"><path d="M10 56 C15 42 30 28 44 27 C53 26 59 29 62 33 L65 38 C65 41 63 43 60 43 L52 44 C40 46 24 48 13 48 L7 48 C6 46 10 56 10 56Z" fill="#2a9d5c" opacity=".88"/><path d="M10 56 C10 60 13 62 17 62 L58 62 C63 62 65 60 65 56" fill="#1e7a44"/><circle cx="28" cy="26" r="7" fill="#6ecf9a" opacity=".45"/><path d="M37 22 C39 17 43 16 48 19" stroke="#2a9d5c" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>`,
+  slippers:`<svg viewBox="0 0 80 80" fill="none"><path d="M10 46 C15 36 34 29 52 30 C62 30 68 34 70 38 L72 43 C72 46 69 48 65 48 L18 50 C12 50 10 48 10 46Z" fill="#2a9d5c" opacity=".88"/><path d="M10 46 C9 50 12 53 16 53 L64 53 C69 53 72 51 72 48" fill="#1e7a44"/><ellipse cx="60" cy="31" rx="8" ry="5" fill="#6ecf9a" opacity=".6"/></svg>`,
+  heels:`<svg viewBox="0 0 80 80" fill="none"><path d="M16 62 C22 42 36 16 56 12 C64 10 69 14 70 20 L72 30 C72 34 70 35 67 35 L56 36 C44 38 26 44 16 54 L12 62Z" fill="#2a9d5c" opacity=".88"/><path d="M12 62 L14 68 C15 71 19 71 22 69 L16 56Z" fill="#1e7a44"/><path d="M62 64 L65 70 C65 72 63 73 61 73 L57 73 C56 73 56 72 57 70 L60 64Z" fill="#1e7a44"/><path d="M16 54 C32 48 56 46 62 64" stroke="#155a31" stroke-width="2" fill="none"/></svg>`,
+  bags:`<svg viewBox="0 0 80 80" fill="none"><rect x="12" y="28" width="56" height="42" rx="7" fill="#2a9d5c" opacity=".88"/><path d="M26 28 C26 18 32 12 40 12 C48 12 54 18 54 28" stroke="#1e7a44" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M12 42 L68 42" stroke="white" stroke-width="2" opacity=".2"/><rect x="30" y="35" width="20" height="10" rx="5" fill="white" opacity=".15"/></svg>`,
+};
+const CATS={women:'حريمي',kids:'أطفالي',slippers:'سليبرات',heels:'هليزات',bags:'شنط'};
+const BTYPES={new:'b-new',sale:'b-sale',luxury:'b-luxury',summer:'b-summer'};
+
+/* DATA */
+const DATA={
+  women:[
+    {id:'w1',name:'حذاء كاجوال سبرينج',price:320,old:450,badge:'جديد',bt:'new',sizes:['٣٦','٣٧','٣٨','٣٩','٤٠','٤١'],colors:['#2a9d5c','#1a1a2e','#c0392b','#f39c12'],cat:'women'},
+    {id:'w2',name:'حذاء شامواه بيج',price:280,old:null,badge:null,bt:null,sizes:['٣٦','٣٧','٣٨','٣٩','٤٠'],colors:['#c8a97a','#f5f0e8','#1a1a2e'],cat:'women'},
+    {id:'w3',name:'حذاء رياضي فليكس',price:380,old:500,badge:'عرض',bt:'sale',sizes:['٣٦','٣٧','٣٨','٣٩','٤٠','٤١'],colors:['#f5f0e8','#2a9d5c','#1a1a2e','#c0392b'],cat:'women'},
+    {id:'w4',name:'بالرينا فيلفت ناعم',price:220,old:null,badge:'جديد',bt:'new',sizes:['٣٦','٣٧','٣٨','٣٩'],colors:['#c0392b','#2a9d5c','#c8a97a','#1a1a2e'],cat:'women'},
+    {id:'w5',name:'صندل صيفي مريح',price:190,old:260,badge:'عرض',bt:'sale',sizes:['٣٦','٣٧','٣٨','٣٩','٤٠'],colors:['#f39c12','#c0392b','#f5f0e8'],cat:'women'},
+    {id:'w6',name:'بوت جلد طبيعي',price:650,old:null,badge:'فاخر',bt:'luxury',sizes:['٣٧','٣٨','٣٩','٤٠','٤١'],colors:['#1a1a2e','#8b4513','#2a9d5c'],cat:'women'},
+  ],
+  kids:[
+    {id:'k1',name:'كوتشي أطفال ملون',price:180,old:240,badge:'عرض',bt:'sale',sizes:['٢٨','٢٩','٣٠','٣١','٣٢','٣٣'],colors:['#c0392b','#2a9d5c','#1a73e8','#f39c12'],cat:'kids'},
+    {id:'k2',name:'صندل أطفال مريح',price:120,old:null,badge:null,bt:null,sizes:['٢٦','٢٧','٢٨','٢٩','٣٠','٣١'],colors:['#1a73e8','#c0392b','#f39c12'],cat:'kids'},
+    {id:'k3',name:'حذاء مدرسة بنات',price:160,old:200,badge:'جديد',bt:'new',sizes:['٣٠','٣١','٣٢','٣٣','٣٤'],colors:['#1a1a2e','#c0392b','#2a9d5c'],cat:'kids'},
+    {id:'k4',name:'حذاء مدرسة ولاد',price:165,old:null,badge:null,bt:null,sizes:['٣٠','٣١','٣٢','٣٣','٣٤','٣٥'],colors:['#1a1a2e','#8b4513'],cat:'kids'},
+  ],
+  slippers:[
+    {id:'s1',name:'سليبر بيتي ناعم',price:85,old:120,badge:'عرض',bt:'sale',sizes:['٣٦','٣٧','٣٨','٣٩','٤٠','٤١'],colors:['#2a9d5c','#c0392b','#1a1a2e','#f5f0e8'],cat:'slippers'},
+    {id:'s2',name:'سليبر فوم مريح',price:95,old:null,badge:'جديد',bt:'new',sizes:['٣٦','٣٧','٣٨','٣٩','٤٠'],colors:['#f39c12','#c0392b','#2a9d5c'],cat:'slippers'},
+    {id:'s3',name:'سليبر مقدمة مفتوحة',price:110,old:150,badge:'صيف',bt:'sale',sizes:['٣٦','٣٧','٣٨','٣٩','٤٠','٤١'],colors:['#f5f0e8','#c8a97a','#c0392b'],cat:'slippers'},
+    {id:'s4',name:'سليبر سبا فاخر',price:70,old:null,badge:null,bt:null,sizes:['٣٦','٣٧','٣٨','٣٩','٤٠'],colors:['#2a9d5c','#c0392b','#f39c12','#1a1a2e'],cat:'slippers'},
+  ],
+  heels:[
+    {id:'h1',name:'كعب سكيني أنيق',price:420,old:600,badge:'عرض ٣٠٪',bt:'sale',sizes:['٣٦','٣٧','٣٨','٣٩','٤٠'],colors:['#1a1a2e','#c0392b','#2a9d5c'],cat:'heels'},
+    {id:'h2',name:'هيل ستيليتو مخملي',price:480,old:null,badge:'فاخر',bt:'luxury',sizes:['٣٦','٣٧','٣٨','٣٩'],colors:['#1a1a2e','#c0392b','#c8a97a'],cat:'heels'},
+    {id:'h3',name:'كعب كيتن كلاسيك',price:350,old:480,badge:'عرض',bt:'sale',sizes:['٣٦','٣٧','٣٨','٣٩','٤٠','٤١'],colors:['#1a1a2e','#c8a97a','#f5f0e8'],cat:'heels'},
+    {id:'h4',name:'بلاتفورم تراند ٢٠٢٥',price:390,old:null,badge:'جديد',bt:'new',sizes:['٣٦','٣٧','٣٨','٣٩','٤٠'],colors:['#2a9d5c','#1a1a2e','#c0392b'],cat:'heels'},
+    {id:'h5',name:'هيل بلوك أوفيس',price:310,old:400,badge:'عرض',bt:'sale',sizes:['٣٧','٣٨','٣٩','٤٠'],colors:['#1a1a2e','#8b4513'],cat:'heels'},
+  ],
+  bags:[
+    {id:'b1',name:'شنطة كروس بودي',price:280,old:380,badge:'عرض',bt:'sale',sizes:['S','M','L'],colors:['#1a1a2e','#8b4513','#c0392b','#2a9d5c'],cat:'bags'},
+    {id:'b2',name:'شنطة توتس كبيرة',price:320,old:null,badge:'جديد',bt:'new',sizes:['M','L','XL'],colors:['#1a1a2e','#c8a97a','#f5f0e8'],cat:'bags'},
+    {id:'b3',name:'شنطة كلاتش سهرة',price:195,old:260,badge:'عرض',bt:'sale',sizes:['One Size'],colors:['#1a1a2e','#c8a97a','#c0392b'],cat:'bags'},
+    {id:'b4',name:'باكباك كاجوال',price:250,old:null,badge:null,bt:null,sizes:['M','L'],colors:['#1a1a2e','#2a9d5c','#c0392b'],cat:'bags'},
+  ]
+};
+
+let cart=[],curCat=null,curFilter='all';
+const SEL={sz:{},cl:{}};
+
+/* LOADER */
+(()=>{
+  let p=0;const el=document.getElementById('ldPct');
+  const iv=setInterval(()=>{
+    p+=Math.random()*9+4;if(p>100){p=100;clearInterval(iv);}
+    el.textContent=Math.round(p)+'%';
+  },75);
+  window.addEventListener('load',()=>{
+    setTimeout(()=>{
+      const ld=document.getElementById('loader');
+      ld.classList.add('out');
+      setTimeout(()=>ld.remove(),800);
+    },400);
+  });
+})();
+
+/* CURSOR */
+(()=>{
+  const c=document.getElementById('cur'),r=document.getElementById('curR');
+  if(!c)return;
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px';});
+  function loop(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop);}
+  loop();
+  document.querySelectorAll('button,a,.cat-card,.pc,.off-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{c.style.width='18px';c.style.height='18px';r.style.width='50px';r.style.height='50px';});
+    el.addEventListener('mouseleave',()=>{c.style.width='10px';c.style.height='10px';r.style.width='34px';r.style.height='34px';});
+  });
+})();
+
+/* SCROLL REVEAL */
+(()=>{
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});
+  },{threshold:.1});
+  document.querySelectorAll('.rv,.rv-l').forEach(el=>obs.observe(el));
+})();
+
+/* SHOW CATEGORY */
+function showCat(cat){
+  curCat=cat;curFilter='all';
+  document.querySelectorAll('.cat-card').forEach(c=>c.classList.remove('on'));
+  document.getElementById('cat-'+cat).classList.add('on');
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.pill')[0].classList.add('on');
+  document.getElementById('prodsTitle').innerHTML=`${ICONS[cat]}<span>${CATS[cat]}</span>`;
+  renderProds(DATA[cat]);
+  setTimeout(()=>document.getElementById('prods-sec').scrollIntoView({behavior:'smooth',block:'start'}),80);
+}
+
+function filterP(type,btn){
+  curFilter=type;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  if(!curCat)return;
+  let p=DATA[curCat];
+  if(type==='new') p=p.filter(x=>x.bt==='new');
+  else if(type==='sale') p=p.filter(x=>x.bt==='sale');
+  renderProds(p);
+}
+
+function renderProds(prods){
+  const g=document.getElementById('prodsGrid');
+  if(!prods.length){
+    g.innerHTML='<div class="empty-s"><svg viewBox="0 0 64 64" fill="none" width="64" height="64"><circle cx="32" cy="32" r="30" stroke="#a8e4c1" stroke-width="2"/><path d="M18 32 c0-8 6-14 14-14s14 6 14 14" stroke="#a8e4c1" stroke-width="2" fill="none"/><line x1="18" y1="32" x2="46" y2="32" stroke="#a8e4c1" stroke-width="2"/></svg><p style="font-size:15px;font-weight:700;margin-top:10px">لا توجد منتجات هنا</p></div>';
+    return;
+  }
+  prods.forEach(p=>{SEL.sz[p.id]=p.sizes[0];SEL.cl[p.id]=p.colors[0];});
+  g.innerHTML=prods.map((p,i)=>`
+<div class="pc" style="animation-delay:${i*0.065}s">
+  <div class="pc-img">
+    ${ICONS[p.cat]}
+    ${p.badge?`<span class="pc-badge ${BTYPES[p.bt]||'b-new'}">${p.badge}</span>`:''}
+  </div>
+  <div class="pc-body">
+    <div class="pc-name">${p.name}</div>
+    <div class="price-row">
+      <span class="p-now">${p.price} جنيه</span>
+      ${p.old?`<span class="p-old">${p.old} جنيه</span>`:''}
+    </div>
+    <div class="sel-lbl">المقاس</div>
+    <div class="sz-row" id="sz-${p.id}">
+      ${p.sizes.map((s,j)=>`<button class="sz${j===0?' on':''}" onclick="pickSz('${p.id}','${s}',this)">${s}</button>`).join('')}
+    </div>
+    <div class="sel-lbl">اللون</div>
+    <div class="cl-row" id="cl-${p.id}">
+      ${p.colors.map((c,j)=>`<div class="cl${j===0?' on':''}" style="background:${c}" onclick="pickCl('${p.id}','${c}',this)"></div>`).join('')}
+    </div>
+    <button class="add-btn" onclick="addCart('${p.id}')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="17" height="17"><path d="M12 5v14M5 12h14"/></svg>
+      أضيفي للسلة
+    </button>
+  </div>
+</div>`).join('');
+}
+
+function pickSz(pid,sz,btn){
+  document.querySelectorAll(`#sz-${pid} .sz`).forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');SEL.sz[pid]=sz;
+}
+function pickCl(pid,cl,btn){
+  document.querySelectorAll(`#cl-${pid} .cl`).forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');SEL.cl[pid]=cl;
+}
+
+/* CART */
+function addCart(pid){
+  const all=Object.values(DATA).flat();
+  const p=all.find(x=>x.id===pid);if(!p)return;
+  const sz=SEL.sz[pid]||p.sizes[0],cl=SEL.cl[pid]||p.colors[0];
+  const ex=cart.find(c=>c.id===pid&&c.sz===sz&&c.cl===cl);
+  if(ex)ex.qty++;else cart.push({...p,sz,cl,qty:1});
+  updCart();toast('تم إضافة '+p.name);
+}
+function delCart(i){cart.splice(i,1);updCart();}
+function updCart(){
+  const count=cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('crtBadge').textContent=count;
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById('cartSum').textContent=total.toLocaleString('ar-EG')+' جنيه';
+  const bd=document.getElementById('cartBd'),ft=document.getElementById('cartFt');
+  if(!cart.length){
+    bd.innerHTML='<div class="c-empty"><svg viewBox="0 0 64 64" fill="none" width="64" height="64"><circle cx="32" cy="32" r="30" stroke="#2a9d5c" stroke-width="2"/><path d="M16 24h32l-4 20H20L16 24z" stroke="#2a9d5c" stroke-width="2" fill="none"/><path d="M24 24V20a8 8 0 0 1 16 0v4" stroke="#2a9d5c" stroke-width="2" fill="none"/></svg><p style="font-size:15px;font-weight:700;color:var(--ink4)">السلة فارغة</p></div>';
+    ft.style.display='none';
+  } else {
+    ft.style.display='block';
+    bd.innerHTML=cart.map((item,idx)=>`
+<div class="c-item">
+  <div class="c-img">${ICONS[item.cat]}</div>
+  <div class="c-info">
+    <div class="c-name">${item.name}</div>
+    <div class="c-meta">مقاس: ${item.sz} | اللون: <span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:${item.cl};border:1px solid rgba(0,0,0,.12);vertical-align:middle;margin-right:2px;"></span></div>
+    <div class="c-meta">الكمية: ${item.qty}</div>
+    <div class="c-price">${(item.price*item.qty).toLocaleString('ar-EG')} جنيه</div>
+  </div>
+  <button class="c-del" onclick="delCart(${idx})">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+  </button>
+</div>`).join('');
+  }
+}
+function openCart(){document.getElementById('cartSide').classList.add('on');document.getElementById('overlay').classList.add('on');}
+function closeCart(){document.getElementById('cartSide').classList.remove('on');document.getElementById('overlay').classList.remove('on');}
+function sendWA(){
+  if(!cart.length)return;
+  let msg='🛍️ *طلب جديد من Verde*\n\n';
+  cart.forEach((item,i)=>{msg+=`${i+1}. *${item.name}*\n   المقاس: ${item.sz}\n   الكمية: ${item.qty}\n   السعر: ${item.price*item.qty} جنيه\n\n`;});
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  msg+=`*الإجمالي: ${total} جنيه*\nأرجو التواصل لتأكيد الطلب 🙏`;
+  window.open('https://wa.me/201145320595?text='+encodeURIComponent(msg),'_blank');
+}
+
+/* TOAST */
+let _tt;
+function toast(msg){
+  clearTimeout(_tt);
+  document.getElementById('toastMsg').textContent=msg;
+  const t=document.getElementById('toast');
+  t.classList.add('on');
+  _tt=setTimeout(()=>t.classList.remove('on'),2800);
+}
+</script>
+</body>
+</html>
